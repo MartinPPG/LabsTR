@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lab-deb-package
-          path: build/deb_package.deb
+          path: build/lab1.deb
 
   deploy:
     needs: build
