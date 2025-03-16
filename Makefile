@@ -4,7 +4,7 @@
 TARGET = lab1
 
 # Путь к исходным файлам
-SRCS = /home/maksim/Documents/linuxlab/*.cpp
+SRCS = ./*.cpp
 
 # Путь к директории для сборки
 BUILD_DIR = ./build
