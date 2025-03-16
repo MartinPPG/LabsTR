@@ -1,14 +1,16 @@
-# Используем базовый образ Ubuntu
+
+
 FROM ubuntu:latest
 
-# Установим необходимые зависимости для работы с .deb пакетом
+# Установим необходимые зависимости
 RUN apt-get update && apt-get install -y dpkg
 
-# Копируем собранный .deb пакет из артефакта в контейнер
+# Скопируем .deb пакет из артефакта в контейнер
 COPY lab1.deb /tmp/
 
-# Устанавливаем .deb пакет
-RUN dpkg -i /tmp/lab1.deb && apt-get -f install -y
+# Установим пакет
+RUN dpkg -i /tmp/lab1.deb
 
-# Указываем точку входа для контейнера
-ENTRYPOINT ["/usr/local/bin/lab1"]
+# Укажем правильный путь к исполнимому файлу
+ENTRYPOINT ["/usr/bin/lab1"]
+
