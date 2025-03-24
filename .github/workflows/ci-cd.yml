@@ -18,10 +18,30 @@ jobs:
 
       - name: Build Application
         run: make build
-        
+
+  test:
+    needs: build  # Указывает, что тесты должны запускаться после сборки
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++ make dpkg
+
       - name: Run Tests
         run: make test
-        
+
+  deb:
+    needs: test  # Указывает, что создание .deb пакета должно происходить после тестов
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: sudo apt-get update && sudo apt-get install -y g++ make dpkg
+
       - name: Package .deb
         run: make deb
 
@@ -32,7 +52,7 @@ jobs:
           path: build/lab1.deb
 
   deploy:
-    needs: build
+    needs: deb  # Указывает, что деплой должен запускаться после создания .deb пакета
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
