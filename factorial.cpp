@@ -6,7 +6,8 @@ using namespace std;
 // Функция для вычисления факториала
 long long factorial(int n) {
     if (n < 0) {
-        return -1; // Возвращаем -1 при отрицательном числе
+        cerr << "Ошибка: факториал отрицательного числа не определён." << endl;
+        return -1;  // Возвращаем -1, чтобы обозначить ошибку
     }
     long long result = 1;
     for (int i = 1; i <= n; ++i) {
@@ -27,8 +28,8 @@ int main(int argc, char* argv[]) {
     if (result != -1) {
         cout << "Факториал " << n << " = " << result << endl;
     } else {
-        // Убираем вывод ошибки, чтобы не путать тесты
-        cout << result << endl;
+        // Мы уже выводим ошибку через cerr в функции factorial
+        return 1;  // Возвращаем ошибку, если факториал не был вычислен
     }
 
     return 0;
