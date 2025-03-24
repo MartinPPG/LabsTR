@@ -3,7 +3,7 @@
 # Компиляция программы
 g++ -o factorial factorial.cpp || { echo "Compilation failed"; exit 1; }
 
-# Массив тестовых случаев
+# Тестовые случаи
 test_cases=(
     "5:120"
     "6:720"
@@ -15,15 +15,12 @@ test_cases=(
 for test in "${test_cases[@]}"; do
     input="${test%%:*}"
     expected="${test##*:}"
-    result=$(./factorial "$input")
+    result=$(./factorial "$input" | awk '{print $NF}')  # Берем последнее слово из вывода
 
-    # Извлечение числового результата из вывода
-    extracted_result=$(echo "$result" | grep -o '[0-9-]\+')
-
-    if [[ "$extracted_result" == "$expected" ]]; then
-        echo "Test passed: '$input' -> $extracted_result"
+    if [[ "$result" == "$expected" ]]; then
+        echo "Test passed: '$input' -> $result"
     else
-        echo "Test failed: '$input' -> $extracted_result (expected $expected)"
+        echo "Test failed: '$input' -> $result (expected $expected)"
         exit 1
     fi
 done
