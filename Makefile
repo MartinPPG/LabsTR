@@ -12,7 +12,7 @@ BUILD_DIR = ./build
 # Тест программы
 test:
 	@echo "Запуск тестов..."
-	go test -v ./*.sh
+	@./test_factorial.sh
 
 # Сборка программы
 build:
