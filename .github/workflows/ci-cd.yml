@@ -18,10 +18,14 @@ jobs:
 
       - name: Build Application
         run: make build
-
+  test:
+    runs-on: ubuntu-latest
+    steps:
       - name: Run Tests
         run: make test
-
+  deb:
+    runs-on: ubuntu-latest
+    steps:
       - name: Package .deb
         run: make deb
 
